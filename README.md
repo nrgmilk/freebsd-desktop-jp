@@ -7,17 +7,18 @@ This script is automatic setting for desktop environment and Japanese input for 
 * FreeBSDデスクトップ利用の利便性を高める。
 
 ## 利用する対象
-* FreeBSDでのデスクトップ環境の構築がわからない
-* いろんなデスクトップ環境をサクッと試してみたい
-* パッケージをインストールしてみたものの設定が良くわからない
-* そもそもviやeeの操作方法が難解で詰んだ
+* FreeBSDでのデスクトップ環境の構築がわからない方
+* いろんなデスクトップ環境をサクッと試してみたい方
+* 環境構築に無駄な時間を費やしたくない方
+* パッケージをインストールしてみたものの設定が良くわからない方
+* そもそもviやeeの操作方法が難解で詰んだけど使ってみたい方
 
 ## 動作環境
-* FreeBSD 10.2 (amd64/i386)
+* FreeBSD 10.2-RELEASE (amd64/i386)
 * FreeBSD 11-CURRENT (amd64/i386)
-* 9以下は現状動きません
+* 9以下は動きません
 * インターネットに接続できること
-* 正しいキーボードの設定が設定済みであること(日本語なら/etc/rc.confのkeymapがjPになっているか)
+* 正しいキーボードの設定が設定済みであること(日本語なら/etc/rc.confのkeymapがjpになっているか)
 
 ## 使い方
 * fetch http://git.io/vE0oh -o setup.sh
