@@ -2,11 +2,25 @@
 
 This script is automatic setting for desktop environment and Japanese input for FreeBSD.
 
-## Goal
-Full auto setting.
-Improve the convenience of the FreeBSD desktop use.
+## 目標
+* 完全自動設定
+* FreeBSDデスクトップ利用の利便性を高める。
 
-###Desktop environment
+## 利用する対象
+* FreeBSDでのデスクトップ環境の構築がわからない
+* いろんなデスクトップ環境をサクッと試してみたい
+* パッケージをインストールしてみたものの設定が良くわからない
+* そもそもviやeeの操作方法が難解で詰んだ
+
+## 動作環境
+* FreeBSD 10.2 (amd64/i386)
+* FreeBSD 11-CURRENT (amd64/i386)
+
+## 設定内容
+
+### パッケージの選択
+
+#### デスクトップ環境(WMも同義とする) 
 * MATE
 * Xfce
 * KDE
@@ -19,12 +33,12 @@ Improve the convenience of the FreeBSD desktop use.
 * openbox
 * Window Maker
 
-###Input method
+#### 日本語入力 (いずれかの組み合わせ1つ)
 * iBus (mozc/anthy/skk)
 * fcitx (mozc/anthy/skk)
 * uim (mozc/anthy)
 
-###Extra packages
+#### ご一緒にいかが？
 * Adobe Flash Player
 * Firefox (Web browser)
 * Chrome (Web browser)
@@ -84,3 +98,11 @@ Improve the convenience of the FreeBSD desktop use.
 * Wifimgr (WiFi Networks Manager)
 * ZSH (Shell)
 * Minecraft (Game)
+
+### パッケージインストール
+
+### インストールしたパッケージの設定及びデスクトップ利用に最適な設定の追加
+
+### サービスの開始
+
+### デスクトップログイン画面の起動
