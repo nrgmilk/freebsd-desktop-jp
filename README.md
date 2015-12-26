@@ -15,6 +15,7 @@ This script is automatic setting for desktop environment and Japanese input for 
 ## 動作環境
 * FreeBSD 10.2 (amd64/i386)
 * FreeBSD 11-CURRENT (amd64/i386)
+※9以下は現状動きません
 
 ## 設定内容
 
