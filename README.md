@@ -106,3 +106,9 @@ This script is automatic setting for desktop environment and Japanese input for 
 ### サービスの開始
 
 ### デスクトップログイン画面の起動
+
+
+## おことわり
+FreeBSDに限らずOSS環境はコロコロ仕様が変わります。
+ある日突然パッケージの仕様が変わって動かなくなることもあります。
+ご了承ください。
