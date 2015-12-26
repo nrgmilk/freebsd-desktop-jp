@@ -15,7 +15,13 @@ This script is automatic setting for desktop environment and Japanese input for 
 ## 動作環境
 * FreeBSD 10.2 (amd64/i386)
 * FreeBSD 11-CURRENT (amd64/i386)
-※9以下は現状動きません
+* 9以下は現状動きません
+* インターネットに接続できること
+* 正しいキーボードの設定が設定済みであること(日本語なら/etc/rc.confのkeymapがjPになっているか)
+
+## 使い方
+* fetch http://git.io/vE0oh -o setup.sh
+* rootになってsh setup.shで起動
 
 ## 設定内容
 
