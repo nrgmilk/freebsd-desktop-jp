@@ -50,7 +50,7 @@ addConf () {
 	EXSIST=`egrep -c "^$1" $3`
 	if [ $EXSIST -ne 0 ]
 	then
-		sed -i -e "s/^$1/#$1/" $3
+		sed -i "" -e "s/^$1/#$1/" $3
 	fi
 	echo $1"=\"$2\"" >> $3
 	unset $EXSIST
@@ -267,23 +267,23 @@ settingIm () {
 			'ibus')
 				case $IM_ENGINE in
 					'mozc-jp')
-						sed -i -e \
+						sed -i "" -e \
 							"s@<language>.*</language>@<language>ja</language>@" \
 							/usr/local/share/ibus/component/mozc.xml
-						sed -i -e \
+						sed -i "" -e \
 							"s@<rank>.*</rank>@<rank>99</rank>@" \
 							/usr/local/share/ibus/component/mozc.xml
-						sed -i -e \
+						sed -i "" -e \
 							"s@<layout>.*</layout>@<layout>us</layout>@" \
 							/usr/local/share/ibus/component/mozc.xml
 						;;
 					'anthy')
-						sed -i -e \
+						sed -i "" -e \
 							"s@<layout>.*</layout>@<layout>us</layout>@" \
 							/usr/local/share/ibus/component/anthy.xml
 						;;
 					'skk')
-						sed -i -e \
+						sed -i "" -e \
 							"s@<layout>.*</layout>@<layout>us</layout>@" \
 							/usr/local/share/ibus/component/skk.xml
 						;;
@@ -299,13 +299,13 @@ settingIm () {
 			'ibus')
 				case $IM_ENGINE in
 					'mozc-jp')
-						sed -i -e \
+						sed -i "" -e \
 							"s@<language>.*</language>@<language>ja</language>@" \
 							/usr/local/share/ibus/component/mozc.xml
-						sed -i -e \
+						sed -i "" -e \
 							"s@<rank>.*</rank>@<rank>99</rank>@" \
 							/usr/local/share/ibus/component/mozc.xml
-						sed -i -e \
+						sed -i "" -e \
 							"s@<layout>.*</layout>@<layout>jp</layout>@" \
 							/usr/local/share/ibus/component/mozc.xml
 						;;
@@ -411,13 +411,7 @@ selectExtra () {
                     kdenlive "Kdenlive (Non-linear video editor)" off \
                     dvdstyler "DVDStyler (DVD recoding and authoring programs)" off \
                     subtitleeditor "Subtitle Editor (Subtitle editor)" off \
-					audacity "Audacity (Audio Editor and Recorder)" off \
-                    ardour "ardour (Multichannel digital audio workstation)" off \
-                    hydrogen "Hydrogen (drum machine)" off \
-                    lmms "LMMS (All-in-one sequencer)" off \
-                    musescore "MuseScore (music composition & notation software)" off \
-                    sooperlooper "SooperLooper (Live audio looping sampler)" off \
-                    jack "JACK (JACK Audio Connection Kit)" off \
+                    AudioProduction "Audio Production Softwares (Meta package)" off \
 					xfburn "XfBurn (CD/DVD Burning)" off \
 					k3b "K3B (CD/DVD Burning)" off \
 					brasero "Brasero (CD/DVD Burning)" off \
@@ -519,16 +513,29 @@ packageExtra () {
 						          lyx \
 						          texlive-full "
 					;;
-				'jack')
+				'AudioProduction')
 					PACKAGE_EXTRA="$PACKAGE_EXTRA\
-						          jackit \
-						          jack-keyboard \
-						          jack-rack \
-						          jack-smf-utils \
-						          jack_ghero \
-						          jack_mixer \
-						          jack_umidi "
-					;;
+                                    audacity \
+                                    ardour \
+                                    rosegarden \
+                                    hydrogen \
+                                    lmms \
+                                    musescore \
+                                    sooperlooper \
+                                    idjc \
+                                    rsynth qsynth whysynth \
+                                    xsynth-dssi fluidsynth-dssi \
+                                    spiralsynth spiralsynthmodular \
+                                    qjackctl \
+                                    jackit \
+                                    jack-keyboard \
+                                    jack-rack \
+                                    jack-smf-utils \
+                                    jack_ghero \
+                                    jack_mixer \
+                                    jack_umidi "
+                    PACKAGE_AUDIO_PRODUCTION=1
+                    ;;
 				*)
 					PACKAGE_EXTRA=$PACKAGE_EXTRA"$i ";;
 			esac
@@ -650,14 +657,14 @@ setup (){
     addFstab linsysfs "linprocfs /compat/linux/sys linsysfs rw 0 0"
 	addFstab fdesc "fdesc /dev/fd fdescfs rw 0 0"
 
-	sed -i -e "s/^#sessiondir/sessiondir/" /usr/local/etc/slim.conf
-	sed -i -e "s/^login_cmd/#login_cmd/" /usr/local/etc/slim.conf
+	sed -i "" -e "s/^#sessiondir/sessiondir/" /usr/local/etc/slim.conf
+	sed -i "" -e "s/^login_cmd/#login_cmd/" /usr/local/etc/slim.conf
 	echo "login_cmd exec /bin/sh - /usr/local/etc/X11/xinit/xinitrc %session" \
 			>> /usr/local/etc/slim.conf
-	sed -i -e "s/^current_theme/#current_theme/" /usr/local/etc/slim.conf
+	sed -i "" -e "s/^current_theme/#current_theme/" /usr/local/etc/slim.conf
 	echo "current_theme      fbsd" \
 			>> /usr/local/etc/slim.conf
-	sed -i -e "s/^session_msg/#session_msg/" /usr/local/etc/slim.conf
+	sed -i "" -e "s/^session_msg/#session_msg/" /usr/local/etc/slim.conf
 	echo "session_msg         [F1]Session:" \
 			>> /usr/local/etc/slim.conf
 
@@ -737,12 +744,55 @@ linsysfs acpi_video fuse" /etc/rc.conf
 
 	if [ "$CLAMAV" != "" ]
 	then
-		sed -i -e "s/^User/#User/" /usr/local/etc/clamd.conf
+		sed -i "" -e "s/^User/#User/" /usr/local/etc/clamd.conf
 		echo "User root" \
 			>> /usr/local/etc/clamd.conf
 		#addConf clamav_clamd_enable "YES" /etc/rc.conf
 		addConf clamav_freshclam_enable "YES" /etc/rc.conf
-		/usr/local/bin/freshclam --quiet
+		/usr/local/bin/freshclam
+	fi
+
+    sed -i "" -e "s/^Categories.*/Categories=Settings;/" \
+        /usr/local/share/applications/flash-player-properties.desktop 1>&2
+        
+    sed -i "" -e "s/^Categories.*/Categories=Network;/" \
+        /usr/local/share/applications/bssh.desktop 1>&2
+    sed -i "" -e "s/^Categories.*/Categories=Network;/" \
+        /usr/local/share/applications/bvnc.desktop 1>&2
+        
+    sed -i "" -e "s/^Categories.*/Categories=AudioVideo;Audio;/" \
+        /usr/local/share/applications/jack-rack.desktop 1>&2
+    sed -i "" -e "s/^Categories.*/Categories=AudioVideo;Audio;/" \
+        /usr/local/share/applications/jack_mixer.desktop 1>&2
+    sed -i "" -e "s/^Categories.*/Categories=AudioVideo;Audio;/" \
+        /usr/local/share/applications/hydrogen.desktop 1>&2
+    sed -i "" -e "s/^Categories.*/Categories=AudioVideo;Audio;/" \
+        /usr/local/share/applications/lmms.desktop 1>&2
+    sed -i "" -e "s/^Categories.*/Categories=AudioVideo;Audio;/" \
+        /usr/local/share/applications/mscore.desktop 1>&2
+    sed -i "" -e "s/^Categories.*/Categories=AudioVideo;Audio;/" \
+        /usr/local/share/applications/qjackctl.desktop 1>&2
+    sed -i "" -e "s/^Categories.*/Categories=AudioVideo;Audio;/" \
+        /usr/local/share/applications/qsynth.desktop 1>&2
+
+    sed -i "" -e "s/^Categories.*/Categories=Utility;/" \
+        /usr/local/share/applications/gucharmap.desktop 1>&2
+
+	if [ "$PACKAGE_AUDIO_PRODUCTION" != "" ]
+	then
+        cat > /usr/local/share/applications/ardour.desktop << EOF
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Name=Ardour Digital Audio Workstation
+Comment=Record, mix and master multi-track audio
+Exec=ardour2 %U
+Terminal=false
+Type=Application
+Icon=/usr/local/share/ardour2/icons/ardour_icon_48px.png
+Categories=AudioVideo;Audio;
+MimeType=application/x-ardour;
+EOF
 	fi
 
 	mv /etc/devfs.rules /etc/devfs.rules.`date +%s`	 > /dev/null 2>&1
