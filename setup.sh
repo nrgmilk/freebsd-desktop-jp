@@ -421,6 +421,7 @@ selectExtra () {
 					geany "Geany (Develop environment)" off \
 					vim "Vim (Develop environment)" off \
 					emacs24 "Emacs (Develop environment)" off \
+					eclipse "Eclipse (Develop environment)" off \
                     meld "Meld (Visual diff and merge tool)" off \
 					openjdk8 "OpenJDK 8 (Java development kit)" off \
 					virtualbox "VirtualBox (Virtual machine)" off \
@@ -616,6 +617,7 @@ install () {
 	
 	pkg install -y 	xorg-minimal \
 					xorg-drivers \
+					xrandr \
 					hal \
 					dbus \
 					setxkbmap \
