@@ -114,6 +114,7 @@ This script is automatic setting for desktop environment and Japanese input for 
 * Geany (Develop environment)
 * Vim (Develop environment)
 * Emacs (Develop environment)
+* Eclipse (Develop environment)
 * Meld (Visual diff and merge tool)
 * OpenJDK 8 (Java development kit)
 * VirtualBox (Virtual machine)
