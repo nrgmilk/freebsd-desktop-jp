@@ -47,25 +47,36 @@ This script is automatic setting for desktop environment and Japanese input for 
 * uim (mozc/anthy)
 
 #### ご一緒にいかが？
+##### インターネット系
 * Adobe Flash Player
 * Firefox (Web browser)
 * Chrome (Web browser)
 * Thunderbird (Mail client)
 * Sylpheed (Mail client)
-* LibreOffice (Office suite)
-* LyX (Document Processor)
 * Filezilla (FTP and SFTP client)
 * XChat (IRC client)
 * Transmission (BitTorrent client)
 * qBittorrent (BitTorrent client)
+* TOR (Anonymizing overlay network for TCP)
+##### メディアプレイヤー・ビューアー
 * VLC (Media player)
 * SMPlayer (Media player)
 * Audacious (Audio player)
+* epdfview (PDF viewer)
+* MComix (Comic viewer)
+* calibre (E-book viewer)
+##### CD/DVD
+* XfBurn (CD/DVD Burning)
+* K3B (CD/DVD Burning)
+* Brasero (CD/DVD Burning)
+##### オフィス・文章作成
+* LibreOffice (Office suite)
+* LyX (Document Processor)
+##### 画像編集・作成系
 * GIMP (Image Manipulation)
 * RawTherapee (RAW image processing)
 * Darktable (Photo workflow software)
 * Shotwell (Photo manager)
-* Blender (3D graphics and animation software)
 * Imagemagick (Image manipulation software)
 * Inkscape (vector graphics editor)
 * MyPaint (painting/scribbling program)
@@ -74,12 +85,16 @@ This script is automatic setting for desktop environment and Japanese input for 
 * FontForge (Font editor)
 * Agave (Color scheme builder)
 * SANE (Scanner API tool)
+##### 3D系
+* Blender (3D graphics and animation software)
+##### 動画編集・作成系
 * FFmpeg (Audio/video encoder/converter)
 * OpenShot Video Editor (Non-linear video editor)
 * Pitivi (Non-linear video editor)
 * Kdenlive (Non-linear video editor)
 * DVDStyler (DVD recoding and authoring programs)
 * Subtitle Editor (Subtitle editor)
+##### 音楽編集・作成系
 * Audacity (Audio Editor and Recorder)
 * ardour (Multichannel digital audio workstation)
 * Hydrogen (drum machine)
@@ -87,12 +102,7 @@ This script is automatic setting for desktop environment and Japanese input for 
 * MuseScore (music composition & notation software)
 * SooperLooper (Live audio looping sampler)
 * JACK (JACK Audio Connection Kit)
-* XfBurn (CD/DVD Burning)
-* K3B (CD/DVD Burning)
-* Brasero (CD/DVD Burning)
-* epdfview (PDF viewer)
-* MComix (Comic viewer)
-* calibre (E-book viewer)
+##### 開発環境
 * Geany (Develop environment)
 * Vim (Develop environment)
 * Emacs (Develop environment)
@@ -101,8 +111,8 @@ This script is automatic setting for desktop environment and Japanese input for 
 * VirtualBox (Virtual machine)
 * Wine (Windows compatibility environment)
 * ADB (Android debug bridge)
+##### その他
 * ClamAV (Antivirus)
-* TOR (Anonymizing overlay network for TCP)
 * Wifimgr (WiFi Networks Manager)
 * ZSH (Shell)
 * Minecraft (Game)
