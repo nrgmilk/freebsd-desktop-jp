@@ -58,6 +58,7 @@ This script is automatic setting for desktop environment and Japanese input for 
 * Transmission (BitTorrent client)
 * qBittorrent (BitTorrent client)
 * TOR (Anonymizing overlay network for TCP)
+
 ##### メディアプレイヤー・ビューアー
 * VLC (Media player)
 * SMPlayer (Media player)
@@ -65,13 +66,16 @@ This script is automatic setting for desktop environment and Japanese input for 
 * epdfview (PDF viewer)
 * MComix (Comic viewer)
 * calibre (E-book viewer)
+
 ##### CD/DVD
 * XfBurn (CD/DVD Burning)
 * K3B (CD/DVD Burning)
 * Brasero (CD/DVD Burning)
+
 ##### オフィス・文章作成
 * LibreOffice (Office suite)
 * LyX (Document Processor)
+
 ##### 画像編集・作成系
 * GIMP (Image Manipulation)
 * RawTherapee (RAW image processing)
@@ -85,8 +89,10 @@ This script is automatic setting for desktop environment and Japanese input for 
 * FontForge (Font editor)
 * Agave (Color scheme builder)
 * SANE (Scanner API tool)
+
 ##### 3D系
 * Blender (3D graphics and animation software)
+
 ##### 動画編集・作成系
 * FFmpeg (Audio/video encoder/converter)
 * OpenShot Video Editor (Non-linear video editor)
@@ -94,6 +100,7 @@ This script is automatic setting for desktop environment and Japanese input for 
 * Kdenlive (Non-linear video editor)
 * DVDStyler (DVD recoding and authoring programs)
 * Subtitle Editor (Subtitle editor)
+
 ##### 音楽編集・作成系
 * Audacity (Audio Editor and Recorder)
 * ardour (Multichannel digital audio workstation)
@@ -102,6 +109,7 @@ This script is automatic setting for desktop environment and Japanese input for 
 * MuseScore (music composition & notation software)
 * SooperLooper (Live audio looping sampler)
 * JACK (JACK Audio Connection Kit)
+
 ##### 開発環境
 * Geany (Develop environment)
 * Vim (Develop environment)
@@ -111,6 +119,7 @@ This script is automatic setting for desktop environment and Japanese input for 
 * VirtualBox (Virtual machine)
 * Wine (Windows compatibility environment)
 * ADB (Android debug bridge)
+
 ##### その他
 * ClamAV (Antivirus)
 * Wifimgr (WiFi Networks Manager)
