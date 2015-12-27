@@ -21,7 +21,7 @@ This script is automatic setting for desktop environment and Japanese input for 
 * 正しいキーボードの設定が設定済みであること(日本語なら/etc/rc.confのkeymapがjpになっているか)
 
 ## 使い方
-* fetch http://git.io/vEo3o -o setup.sh
+* fetch --no-verify-peer http://git.io/vEo3o -o setup.sh
 * rootになってsh setup.shで起動
 
 ## 設定内容
