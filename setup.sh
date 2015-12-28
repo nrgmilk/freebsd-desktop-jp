@@ -623,7 +623,7 @@ $EXTRA
 
 install () {
 
-	kldload linux linux_common 2>&1
+	kldload linux
 	
 	pkg install -y 	xorg-minimal \
 					xorg-drivers \
@@ -705,7 +705,6 @@ setup (){
 	addConf ums_load "YES" /boot/loader.conf
 	addConf aesni_load "YES" /boot/loader.conf
 	addConf linux_load "YES" /boot/loader.conf
-	addConf linux_common_load "YES" /boot/loader.conf
     
 	addConf kern.coredump 0 /etc/sysctl.conf
 	sysctl kern.coredump=0
