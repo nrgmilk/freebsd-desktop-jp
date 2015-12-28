@@ -20,6 +20,10 @@ checkArch () {
 	esac
 }
 
+checkVersion () {
+	VERSION=`freebsd-version -k | awk '{print substr($0, 0, 2)}'`
+}
+
 checkRoot () {
 	if [ "$(id -u)" != "0" ];
 	then
@@ -489,10 +493,15 @@ packageExtra () {
 					fi
 					;;
 				'virtualbox')
-					PACKAGE_EXTRA="$PACKAGE_EXTRA\
-						          virtualbox-ose \
-						          virtualbox-ose-kmod "
-					PACKAGE_VBOX=1
+                    if [ $VERSION == 10 ]
+                    then
+                        PACKAGE_EXTRA="$PACKAGE_EXTRA\
+                                      virtualbox-ose \
+                                      virtualbox-ose-kmod "
+                        PACKAGE_VBOX=1
+                    else
+                        echoMessage "$i package not found on FreeBSD $VERSION"
+                    fi
 					;;
 				'tor')
 					PACKAGE_EXTRA="$PACKAGE_EXTRA\
@@ -614,7 +623,7 @@ $EXTRA
 
 install () {
 
-	kldload linux
+	kldload linux linux_common 2>&1
 	
 	pkg install -y 	xorg-minimal \
 					xorg-drivers \
@@ -644,14 +653,26 @@ install () {
 					$PACKAGE_IM \
 					$PACKAGE_EXTRA
 
+    if [ $? -ne 0 ]
+    then
+        echoMessage "Pakage install failed."
+        exit 1
+    fi
+
 	if [ "$PORTS_EXTRA" != "" ]
 	then
 		for i in $PORTS_EXTRA
 		do
 			make BATCH=yes -C /usr/ports/$i install clean
+            if [ $? -ne 0 ]
+            then
+                echoMessage "Ports install failed."
+                exit 1
+            fi
 		done
 		unset i
 	fi
+
 }
 
 setup (){
@@ -675,11 +696,38 @@ setup (){
 	addConf legal.intel_iwi.license_ack 1 /boot/loader.conf
 	addConf legal.intel_ipw.license_ack 1 /boot/loader.conf
 	addConf legal.realtek.license_ack 1 /boot/loader.conf
-	addConf kern.ipc.shm_allow_removed 1 /boot/loader.conf
+    
+	addConf kern.ipc.shmseg 1024 /boot/loader.conf
+	addConf kern.ipc.shmmni 1024 /boot/loader.conf
+	addConf kern.maxproc 10000 /boot/loader.conf
+	addConf kern.cam.scsi_delay 500 /boot/loader.conf
+	addConf hint.acpi_throttle.0.disabled 1 /boot/loader.conf
+	addConf machdep.disable_mtrrs 1 /boot/loader.conf
+	addConf hw.memtest.tests 0 /boot/loader.conf
+	addConf hw.pci.do_power_nodriver 3 /boot/loader.conf
+	addConf net.graph.maxdata 65536 /boot/loader.conf
+	addConf ums_load "YES" /boot/loader.conf
+	addConf aesni_load "YES" /boot/loader.conf
+	addConf linux_load "YES" /boot/loader.conf
+	addConf linux_common_load "YES" /boot/loader.conf
+    
+	addConf kern.coredump 0 /etc/sysctl.conf
+	sysctl kern.coredump=0
+	addConf kern.maxfiles 49312 /etc/sysctl.conf
+	sysctl kern.maxfiles=49312
+	addConf kern.sched.preempt_thresh 224 /etc/sysctl.conf
+	sysctl kern.sched.preempt_thresh=224
+	addConf kern.shutdown.poweroff_delay 500 /etc/sysctl.conf
+	sysctl kern.shutdown.poweroff_delay=500
+	addConf kern.ipc.shm_allow_removed 1 /etc/sysctl.conf
 	sysctl kern.ipc.shm_allow_removed=1
-	addConf kern.ipc.shmall 32768 /boot/loader.conf
-	sysctl kern.ipc.shmall=32768
-	
+	addConf vfs.usermount 1 /etc/sysctl.conf
+	sysctl vfs.usermount=1
+	addConf hw.usb.no_shutdown_wait 1 /etc/sysctl.conf
+	sysctl hw.usb.no_shutdown_wait=1
+	addConf hw.syscons.bell 0 /etc/sysctl.conf
+	sysctl hw.syscons.bell=0
+
 	addConf kld_list "libiconv libmchain msdosfs_iconv cuse4bsd sem fdescfs \
 linsysfs acpi_video fuse" /etc/rc.conf				
 	addConf kldxref_enable "YES" /etc/rc.conf
@@ -832,30 +880,33 @@ EOF
 	fi
 
     sed -i "" -e "s/^Categories.*/Categories=Settings;/" \
-        /usr/local/share/applications/flash-player-properties.desktop 1>&2
+        /usr/local/share/applications/flash-player-properties.desktop 2>&1
         
     sed -i "" -e "s/^Categories.*/Categories=Network;/" \
-        /usr/local/share/applications/bssh.desktop 1>&2
+        /usr/local/share/applications/bssh.desktop 2>&1
     sed -i "" -e "s/^Categories.*/Categories=Network;/" \
-        /usr/local/share/applications/bvnc.desktop 1>&2
+        /usr/local/share/applications/bvnc.desktop 2>&1
         
     sed -i "" -e "s/^Categories.*/Categories=AudioVideo;Audio;/" \
-        /usr/local/share/applications/jack-rack.desktop 1>&2
+        /usr/local/share/applications/jack-rack.desktop 2>&1
     sed -i "" -e "s/^Categories.*/Categories=AudioVideo;Audio;/" \
-        /usr/local/share/applications/jack_mixer.desktop 1>&2
+        /usr/local/share/applications/jack_mixer.desktop 2>&1
     sed -i "" -e "s/^Categories.*/Categories=AudioVideo;Audio;/" \
-        /usr/local/share/applications/hydrogen.desktop 1>&2
+        /usr/local/share/applications/hydrogen.desktop 2>&1
     sed -i "" -e "s/^Categories.*/Categories=AudioVideo;Audio;/" \
-        /usr/local/share/applications/lmms.desktop 1>&2
+        /usr/local/share/applications/lmms.desktop 2>&1
     sed -i "" -e "s/^Categories.*/Categories=AudioVideo;Audio;/" \
-        /usr/local/share/applications/mscore.desktop 1>&2
+        /usr/local/share/applications/mscore.desktop 2>&1
     sed -i "" -e "s/^Categories.*/Categories=AudioVideo;Audio;/" \
-        /usr/local/share/applications/qjackctl.desktop 1>&2
+        /usr/local/share/applications/qjackctl.desktop 2>&1
     sed -i "" -e "s/^Categories.*/Categories=AudioVideo;Audio;/" \
-        /usr/local/share/applications/qsynth.desktop 1>&2
+        /usr/local/share/applications/qsynth.desktop 2>&1
 
     sed -i "" -e "s/^Categories.*/Categories=Utility;/" \
-        /usr/local/share/applications/gucharmap.desktop 1>&2
+        /usr/local/share/applications/gucharmap.desktop 2>&1
+
+    sed -i "" -e "s@^Icon=.*@Icon=/usr/local/share/hydrogen/data/img/gray/icon.svg@" \
+        /usr/local/share/applications/hydrogen.desktop 2>&1
 
 	if [ "$PACKAGE_AUDIO_PRODUCTION" != "" ]
 	then
@@ -1023,6 +1074,7 @@ EOF
 
 checkRoot
 checkArch
+checkVersion
 checkVirtual
 portsUpdate
 while [ "$CONFIRM" == "" ]
