@@ -461,10 +461,12 @@ packageExtra () {
 				'firefox')
 					PACKAGE_EXTRA="$PACKAGE_EXTRA\
 						          firefox firefox-i18n "
+                    PACKAGE_FIREFOX=1
 					;;
 				'thunderbird')
 					PACKAGE_EXTRA="$PACKAGE_EXTRA\
 						          thunderbird thunderbird-i18n "
+                    PACKAGE_THUNDERBIRD=1
 					;;
 				'wine')
 					if [ $ARCH == "amd64" ]
@@ -490,18 +492,23 @@ packageExtra () {
 					PACKAGE_EXTRA="$PACKAGE_EXTRA\
 						          virtualbox-ose \
 						          virtualbox-ose-kmod "
-					VBOX=1
+					PACKAGE_VBOX=1
 					;;
 				'tor')
 					PACKAGE_EXTRA="$PACKAGE_EXTRA\
 						          tor "
-					TOR=1
+					PACKAGE_TOR=1
 					;;
 				'clamav')
 					PACKAGE_EXTRA="$PACKAGE_EXTRA\
 						          clamav \
 						          clamtk "
-					CLAMAV=1
+					PACKAGE_CLAMAV=1
+					;;
+				'eclipse')
+					PACKAGE_EXTRA="$PACKAGE_EXTRA\
+						          eclipse "
+					PACKAGE_ECLIPSE=1
 					;;
 				'audacious')
 					PACKAGE_EXTRA="$PACKAGE_EXTRA\
@@ -509,16 +516,10 @@ packageExtra () {
 						          audacious-skins \
 						          audacious-plugins "
 					;;
-				'lyx')
-					PACKAGE_EXTRA="$PACKAGE_EXTRA\
-						          lyx \
-						          texlive-full "
-					;;
 				'AudioProduction')
 					PACKAGE_EXTRA="$PACKAGE_EXTRA\
                                     audacity \
                                     ardour \
-                                    rosegarden \
                                     hydrogen \
                                     lmms \
                                     musescore \
@@ -637,6 +638,7 @@ install () {
 					panicmail \
 					cups \
 					avahi \
+					gmake \
 					linux_base-c6 \
 					$PACKAGE_DESKTOP \
 					$PACKAGE_IM \
@@ -709,7 +711,41 @@ linsysfs acpi_video fuse" /etc/rc.conf
 	addConf dbus_enable "YES" /etc/rc.conf
 	addConf slim_enable "YES" /etc/rc.conf
 
-	if [ "$VBOX" != "" ]
+	if [ "$PACKAGE_FIREFOX" != "" ]
+	then
+        cat > /usr/local/lib/firefox/defaults/pref/local-settings.js << EOF
+pref("general.config.obscure_value", 0);
+pref("general.config.filename", "localize.js");
+EOF
+        cat > /usr/local/lib/firefox/localize.js << EOF
+pref("extensions.bootstrappedAddons", "{"langpack-ja@firefox.mozilla.org":{"type":"locale","descriptor":"/usr/local/lib/firefox/browser/extensions/langpack-ja@firefox.mozilla.org","multiprocessCompatible":false}}");
+pref("extensions.autoDisableScopes", 0);
+pref("general.useragent.locale", "ja-JP");
+pref("font.language.group", "ja");
+pref("intl.accept_languages", "ja-JP, ja, en-US, en");
+pref("startup.homepage_welcome_url", "");
+pref("startup.homepage_welcome_url.additional", "");
+EOF
+	fi
+
+	if [ "$PACKAGE_THUNDERBIRD" != "" ]
+	then
+        cat > /usr/local/lib/thunderbird/defaults/pref/local-settings.js << EOF
+pref("general.config.obscure_value", 0);
+pref("general.config.filename", "localize.js");
+EOF
+        cat > /usr/local/lib/thunderbird/localize.js << EOF
+pref("extensions.bootstrappedAddons", "{"langpack-ja@thunderbird.mozilla.org":{"type":"locale","descriptor":"/usr/local/lib/thunderbird/extensions/langpack-ja@thunderbird.mozilla.org","multiprocessCompatible":false}}");
+pref("extensions.autoDisableScopes", 0);
+pref("general.useragent.locale", "ja-JP");
+pref("font.language.group", "ja");
+pref("intl.accept_languages", "ja-JP, ja, en-US, en");
+pref("startup.homepage_welcome_url", "");
+pref("startup.homepage_welcome_url.additional", "");
+EOF
+	fi
+
+	if [ "$PACKAGE_VBOX" != "" ]
 	then
 		addConf vboxnet_enable "YES" /etc/rc.conf
 		addConf vboxwatchdog_enable "YES" /etc/rc.conf
@@ -732,7 +768,7 @@ linsysfs acpi_video fuse" /etc/rc.conf
 		addConf vmware_guestd_enable "YES" /etc/rc.conf
 	fi
 
-	if [ "$TOR" != "" ]
+	if [ "$PACKAGE_TOR" != "" ]
 	then
 		addConf tor_enable "YES" /etc/rc.conf
 		addConf net.inet.ip.random_id "1" /boot/loader.conf
@@ -744,7 +780,7 @@ linsysfs acpi_video fuse" /etc/rc.conf
 		chmod -R 700 /var/db/tor
 	fi
 
-	if [ "$CLAMAV" != "" ]
+	if [ "$PACKAGE_CLAMAV" != "" ]
 	then
 		sed -i "" -e "s/^User/#User/" /usr/local/etc/clamd.conf
 		echo "User root" \
@@ -752,6 +788,47 @@ linsysfs acpi_video fuse" /etc/rc.conf
 		#addConf clamav_clamd_enable "YES" /etc/rc.conf
 		addConf clamav_freshclam_enable "YES" /etc/rc.conf
 		/usr/local/bin/freshclam
+	fi
+
+	if [ "$PACKAGE_ECLIPSE" != "" ]
+	then
+        fetch http://www.eclipse.org/ecd/img/eclipse256.png -o /usr/local/share/eclipse
+        cd /tmp
+        fetch http://svn.sourceforge.jp/svnroot/mergedoc/trunk/Pleiades/build/pleiades.zip
+        tar xvzf pleiades.zip
+        cp -a plugins/* /usr/local/lib/eclipse/plugins/
+        cp -a features/* /usr/local/lib/eclipse/features/
+        echo "-javaagent:/usr/local/lib/eclipse/plugins/jp.sourceforge.mergedoc.pleiades/pleiades.jar" \
+            >> /usr/local/lib/eclipse/eclipse.ini
+        echo "-Xverify:none" \
+            >> /usr/local/lib/eclipse/eclipse.ini
+        cd -
+        cat > /usr/local/share/applications/eclipse.desktop << EOF
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Name=Eclipse
+Comment=Eclipse Development Environment
+Exec=eclipse %F
+Terminal=false
+Type=Application
+Icon=/usr/local/share/eclipse/eclipse256.png
+Categories=Development;
+MimeType=text/plain;text/x-chdr;text/x-csrc;text/x-c++hdr;text/x-c++src;text/x-java;text/x-dsrc;text/x-pascal;text/x-perl;text/x-python;application/x-php;application/x-httpd-php3;application/x-httpd-php4;application/x-httpd-php5;application/xml;text/html;text/css;text/x-sql;text/x-diff;
+EOF
+        cat > /usr/local/share/applications/eclipse-clean.desktop << EOF
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Name=Eclipse (clean cache)
+Comment=Eclipse Development Environment
+Exec=eclipse -clean %F
+Terminal=false
+Type=Application
+Icon=/usr/local/share/eclipse/eclipse256.png
+Categories=Development;
+MimeType=text/plain;text/x-chdr;text/x-csrc;text/x-c++hdr;text/x-c++src;text/x-java;text/x-dsrc;text/x-pascal;text/x-perl;text/x-python;application/x-php;application/x-httpd-php3;application/x-httpd-php4;application/x-httpd-php5;application/xml;text/html;text/css;text/x-sql;text/x-diff;
+EOF
 	fi
 
     sed -i "" -e "s/^Categories.*/Categories=Settings;/" \
@@ -920,6 +997,17 @@ case \$1 in
                 dconf write /org/mate/desktop/peripherals/mouse/cursor-theme "'mate'"
                 dconf write /org/mate/notification-daemon/theme "'slider'"
                 touch \$HOME/.dconf_mate_setup
+        fi
+        ;;
+    'cinnamon-session-cinnamon')
+        if [ ! -f \$HOME/.dconf_cinnamon_setup ]
+        then
+                dconf write /org/cinnamon/desktop/interface/icon-theme "'matefaenza'"
+                dconf write /org/cinnamon/desktop/interface/cursor-theme "'mate'"
+                dconf write /org/cinnamon/desktop/interface/gtk-theme "'Menta'"
+                dconf write /org/cinnamon/desktop/wm/preferences/theme "'Menta'"
+                dconf write /org/cinnamon/theme/name "'cinnamon'"
+                touch \$HOME/.dconf_cinnamon_setup
         fi
         ;;
     *)
