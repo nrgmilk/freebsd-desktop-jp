@@ -798,10 +798,10 @@ EOF
         tar xvzf pleiades.zip
         cp -a plugins/* /usr/local/lib/eclipse/plugins/
         cp -a features/* /usr/local/lib/eclipse/features/
-        echo "-javaagent:/usr/local/lib/eclipse/plugins/jp.sourceforge.mergedoc.pleiades/pleiades.jar" \
-            >> /usr/local/lib/eclipse/eclipse.ini
-        echo "-Xverify:none" \
-            >> /usr/local/lib/eclipse/eclipse.ini
+        sed -i "" -e "s@^-Xms.*m@-Xms1024m@" \
+            /usr/local/lib/eclipse/eclipse.ini 1>&2
+        sed -i "" -e "s@^-Xmx.*m@-Xmx1024m@" \
+            /usr/local/lib/eclipse/eclipse.ini 1>&2
         cd -
         cat > /usr/local/share/applications/eclipse.desktop << EOF
 [Desktop Entry]
@@ -809,7 +809,7 @@ Encoding=UTF-8
 Version=1.0
 Name=Eclipse
 Comment=Eclipse Development Environment
-Exec=eclipse %F
+Exec=eclipse -vmargs -Xverify:none -javaagent:/usr/local/lib/eclipse/plugins/jp.sourceforge.mergedoc.pleiades/pleiades.jar -Xms1024m -Xmx1024m %F
 Terminal=false
 Type=Application
 Icon=/usr/local/share/eclipse/eclipse256.png
@@ -820,9 +820,9 @@ EOF
 [Desktop Entry]
 Encoding=UTF-8
 Version=1.0
-Name=Eclipse (clean cache)
+Name=Eclipse (clean)
 Comment=Eclipse Development Environment
-Exec=eclipse -clean %F
+Exec=eclipse -clean
 Terminal=false
 Type=Application
 Icon=/usr/local/share/eclipse/eclipse256.png
