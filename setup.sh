@@ -628,8 +628,7 @@ install () {
 	pkg install -y 	xorg-minimal \
 					xorg-drivers \
 					xrandr \
-					hal \
-					dbus \
+					hal dbus \
 					setxkbmap \
 					xterm \
 					zip p7zip rar lha \
@@ -637,17 +636,14 @@ install () {
 					urwfonts-ttf \
 					droid-fonts-ttf \
 					slim slim-themes \
-					uhidd \
-					volman \
-					swapexd \
-					webcamd \
+					uhidd volman \
+					swapexd webcamd \
 					fusefs-ext4fuse \
 					fusefs-ntfs \
 					cuse4bsd-kmod \
 					panicmail \
-					cups \
-					avahi \
-					gmake \
+					cups avahi \
+					gmake ffmpegthumbnailer \
 					linux_base-c6 \
 					$PACKAGE_DESKTOP \
 					$PACKAGE_IM \
