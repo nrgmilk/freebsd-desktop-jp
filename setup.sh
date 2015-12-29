@@ -920,6 +920,7 @@ MimeType=application/x-ardour;
 EOF
 	fi
 
+	mv /etc/X11/xorg.conf /etc/X11/xorg.conf.`date +%s`	 > /dev/null 2>&1
 	mv /etc/devfs.rules /etc/devfs.rules.`date +%s`	 > /dev/null 2>&1
 	
 	cat >> /etc/devfs.rules << EOF
