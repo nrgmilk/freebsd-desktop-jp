@@ -633,8 +633,10 @@ install () {
 					xterm \
 					zip p7zip rar lha \
 					ja-font-migu \
+					ja-font-ipamjm \
 					urwfonts-ttf \
 					droid-fonts-ttf \
+					liberation-fonts-ttf \
 					slim slim-themes \
 					uhidd volman \
 					swapexd webcamd \
@@ -766,6 +768,9 @@ pref("extensions.autoDisableScopes", 0);
 pref("general.useragent.locale", "ja-JP");
 pref("font.language.group", "ja");
 pref("intl.accept_languages", "ja-JP, ja, en-US, en");
+pref("font.name.monospace.ja", "Migu 1M");
+pref("font.name.sans-serif.ja", "Migu 1C");
+pref("font.name.serif.ja", "IPAmjMincho");
 pref("startup.homepage_welcome_url", "");
 pref("startup.homepage_welcome_url.additional", "");
 EOF
@@ -783,6 +788,9 @@ pref("extensions.autoDisableScopes", 0);
 pref("general.useragent.locale", "ja-JP");
 pref("font.language.group", "ja");
 pref("intl.accept_languages", "ja-JP, ja, en-US, en");
+pref("font.name.monospace.ja", "Migu 1M");
+pref("font.name.sans-serif.ja", "Migu 1C");
+pref("font.name.serif.ja", "IPAmjMincho");
 pref("startup.homepage_welcome_url", "");
 pref("startup.homepage_welcome_url.additional", "");
 EOF
