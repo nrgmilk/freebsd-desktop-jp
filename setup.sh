@@ -57,7 +57,7 @@ addConf () {
 		sed -i "" -e "s/^$1/#$1/" $3
 	fi
 	echo $1"=\"$2\"" >> $3
-	unset $EXSIST
+	unset EXSIST
 }
 
 addComment () {
@@ -71,7 +71,7 @@ addFstab () {
 	then
 		echo "$2" >> /etc/fstab
 	fi
-	unset $EXSIST
+	unset EXSIST
 }
 
 portsUpdate () {
@@ -381,62 +381,62 @@ EOF
 
 selectExtra () {
 	EXTRA=`dialog  --stdout --no-tags --nocancel --checklist \
-					"Select extra packages. " 20 76 58 \
-					flash "Adobe Flash Player" off \
-					firefox "Firefox (Web browser)" off  \
-					chromium "Chrome (Web browser)" off \
-					thunderbird "Thunderbird (Mail client)" off \
-					sylpheed "Sylpheed (Mail client)" off \
-					libreoffice "LibreOffice (Office suite)" off \
-					lyx "LyX (Document Processor)" off \
-					filezilla "Filezilla (FTP and SFTP client)" off \
-                    xchat "XChat (IRC client)" off \
-                    transmission "Transmission (BitTorrent client)" off \
-                    qbittorrent "qBittorrent (BitTorrent client)" off \
-					vlc "VLC (Media player)" off \
-					smplayer "SMPlayer (Media player)" off \
-                    audacious "Audacious (Audio player)" off \
-					gimp "GIMP (Image Manipulation)" off \
-					rawtherapee "RawTherapee (RAW image processing)" off \
-					darktable "Darktable (Photo workflow software)" off \
-					shotwell "Shotwell (Photo manager)" off \
-                    blender "Blender (3D graphics and animation software)" off \
-                    Imagemagick "Imagemagick (Image manipulation software)" off \
-                    Inkscape "Inkscape (vector graphics editor)" off \
-                    mypaint "MyPaint (painting/scribbling program)" off \
-                    scribus "Scribus (Comprehensive desktop publishing program)" off \
-                    synfigstudio "Synfig Studio (Vector-based 2D animation software)" off \
-                    fontforge "FontForge (Font editor)" off \
-                    agave "Agave (Color scheme builder)" off \
-                    xsane "SANE (Scanner API tool)" off \
-					ffmpeg "FFmpeg (Audio/video encoder/converter)" off \
-                    openshot "OpenShot Video Editor (Non-linear video editor)" off \
-                    pitivi "Pitivi (Non-linear video editor)" off \
-                    kdenlive "Kdenlive (Non-linear video editor)" off \
-                    dvdstyler "DVDStyler (DVD recoding and authoring programs)" off \
-                    subtitleeditor "Subtitle Editor (Subtitle editor)" off \
-                    AudioProduction "Audio Production Softwares (Meta package)" off \
-					xfburn "XfBurn (CD/DVD Burning)" off \
-					k3b "K3B (CD/DVD Burning)" off \
-					brasero "Brasero (CD/DVD Burning)" off \
-					epdfview "epdfview (PDF viewer)" off \
-					py27-mcomix "MComix (Comic viewer)" off \
-                    calibre "calibre (E-book viewer)" off \
-					geany "Geany (Develop environment)" off \
-					vim "Vim (Develop environment)" off \
-					emacs24 "Emacs (Develop environment)" off \
-					eclipse "Eclipse (Develop environment)" off \
-                    meld "Meld (Visual diff and merge tool)" off \
-					openjdk8 "OpenJDK 8 (Java development kit)" off \
-					virtualbox "VirtualBox (Virtual machine)" off \
-					wine "Wine (Windows compatibility environment)" off \
-					android-tools-adb "ADB (Android debug bridge)" off \
-					clamav "ClamAV (Antivirus)" off \
-					tor "TOR (Anonymizing overlay network for TCP)" off \
-					wifimgr "Wifimgr (WiFi Networks Manager)" off \
-					zsh "ZSH (Shell)" off \
-					minecraft-client "Minecraft (Game)" off \
-					`
+            "Select extra packages. " 20 76 58 \
+            flash "Adobe Flash Player" off \
+            firefox "Firefox (Web browser)" off  \
+            chromium "Chrome (Web browser)" off \
+            thunderbird "Thunderbird (Mail client)" off \
+            sylpheed "Sylpheed (Mail client)" off \
+            libreoffice "LibreOffice (Office suite)" off \
+            lyx "LyX (Document Processor)" off \
+            filezilla "Filezilla (FTP and SFTP client)" off \
+            xchat "XChat (IRC client)" off \
+            transmission "Transmission (BitTorrent client)" off \
+            qbittorrent "qBittorrent (BitTorrent client)" off \
+            vlc "VLC (Media player)" off \
+            smplayer "SMPlayer (Media player)" off \
+            audacious "Audacious (Audio player)" off \
+            gimp "GIMP (Image Manipulation)" off \
+            rawtherapee "RawTherapee (RAW image processing)" off \
+            darktable "Darktable (Photo workflow software)" off \
+            shotwell "Shotwell (Photo manager)" off \
+            blender "Blender (3D graphics and animation software)" off \
+            Imagemagick "Imagemagick (Image manipulation software)" off \
+            Inkscape "Inkscape (vector graphics editor)" off \
+            mypaint "MyPaint (painting/scribbling program)" off \
+            scribus "Scribus (Comprehensive desktop publishing program)" off \
+            synfigstudio "Synfig Studio (Vector-based 2D animation software)" off \
+            fontforge "FontForge (Font editor)" off \
+            agave "Agave (Color scheme builder)" off \
+            xsane "SANE (Scanner API tool)" off \
+            ffmpeg "FFmpeg (Audio/video encoder/converter)" off \
+            openshot "OpenShot Video Editor (Non-linear video editor)" off \
+            pitivi "Pitivi (Non-linear video editor)" off \
+            kdenlive "Kdenlive (Non-linear video editor)" off \
+            dvdstyler "DVDStyler (DVD recoding and authoring programs)" off \
+            subtitleeditor "Subtitle Editor (Subtitle editor)" off \
+            AudioProduction "Audio Production Softwares (Meta package)" off \
+            xfburn "XfBurn (CD/DVD Burning)" off \
+            k3b "K3B (CD/DVD Burning)" off \
+            brasero "Brasero (CD/DVD Burning)" off \
+            epdfview "epdfview (PDF viewer)" off \
+            py27-mcomix "MComix (Comic viewer)" off \
+            calibre "calibre (E-book viewer)" off \
+            geany "Geany (Develop environment)" off \
+            vim "Vim (Develop environment)" off \
+            emacs24 "Emacs (Develop environment)" off \
+            eclipse "Eclipse (Develop environment)" off \
+            meld "Meld (Visual diff and merge tool)" off \
+            openjdk8 "OpenJDK 8 (Java development kit)" off \
+            virtualbox "VirtualBox (Virtual machine)" off \
+            wine "Wine (Windows compatibility environment)" off \
+            android-tools-adb "ADB (Android debug bridge)" off \
+            clamav "ClamAV (Antivirus)" off \
+            tor "TOR (Anonymizing overlay network for TCP)" off \
+            wifimgr "Wifimgr (WiFi Networks Manager)" off \
+            zsh "ZSH (Shell)" off \
+            minecraft-client "Minecraft (Game)" off \
+            `
 }
 
 packageExtra () {
@@ -521,12 +521,12 @@ packageExtra () {
 					;;
 				'audacious')
 					PACKAGE_EXTRA="$PACKAGE_EXTRA\
-						          audacious \
-						          audacious-skins \
-						          audacious-plugins "
+                                    audacious \
+                                    audacious-skins \
+                                    audacious-plugins "
 					;;
 				'AudioProduction')
-					PACKAGE_EXTRA="$PACKAGE_EXTRA\
+                    PACKAGE_EXTRA="$PACKAGE_EXTRA\
                                     audacity \
                                     ardour \
                                     hydrogen \
@@ -691,70 +691,70 @@ setup (){
 	echo "session_msg         [F1]Session:" \
 			>> /usr/local/etc/slim.conf
 
-	addConf legal.intel_iwi.license_ack 1 /boot/loader.conf
-	addConf legal.intel_ipw.license_ack 1 /boot/loader.conf
-	addConf legal.realtek.license_ack 1 /boot/loader.conf
+    addConf legal.intel_iwi.license_ack 1 /boot/loader.conf
+    addConf legal.intel_ipw.license_ack 1 /boot/loader.conf
+    addConf legal.realtek.license_ack 1 /boot/loader.conf
     
-	addConf kern.ipc.shmseg 1024 /boot/loader.conf
-	addConf kern.ipc.shmmni 1024 /boot/loader.conf
-	addConf kern.maxproc 10000 /boot/loader.conf
-	addConf kern.cam.scsi_delay 500 /boot/loader.conf
-	addConf hint.acpi_throttle.0.disabled 1 /boot/loader.conf
-	addConf machdep.disable_mtrrs 1 /boot/loader.conf
-	addConf hw.memtest.tests 0 /boot/loader.conf
-	addConf hw.pci.do_power_nodriver 3 /boot/loader.conf
-	addConf net.graph.maxdata 65536 /boot/loader.conf
-	addConf ums_load "YES" /boot/loader.conf
-	addConf aesni_load "YES" /boot/loader.conf
-	addConf linux_load "YES" /boot/loader.conf
+    addConf kern.ipc.shmseg 1024 /boot/loader.conf
+    addConf kern.ipc.shmmni 1024 /boot/loader.conf
+    addConf kern.maxproc 10000 /boot/loader.conf
+    addConf kern.cam.scsi_delay 500 /boot/loader.conf
+    addConf hint.acpi_throttle.0.disabled 1 /boot/loader.conf
+    addConf machdep.disable_mtrrs 1 /boot/loader.conf
+    addConf hw.memtest.tests 0 /boot/loader.conf
+    addConf hw.pci.do_power_nodriver 3 /boot/loader.conf
+    addConf net.graph.maxdata 65536 /boot/loader.conf
+    addConf ums_load "YES" /boot/loader.conf
+    addConf aesni_load "YES" /boot/loader.conf
+    addConf linux_load "YES" /boot/loader.conf
     
-	addConf kern.coredump 0 /etc/sysctl.conf
-	sysctl kern.coredump=0
-	addConf kern.maxfiles 49312 /etc/sysctl.conf
-	sysctl kern.maxfiles=49312
-	addConf kern.sched.preempt_thresh 224 /etc/sysctl.conf
-	sysctl kern.sched.preempt_thresh=224
-	addConf kern.shutdown.poweroff_delay 500 /etc/sysctl.conf
-	sysctl kern.shutdown.poweroff_delay=500
-	addConf kern.ipc.shm_allow_removed 1 /etc/sysctl.conf
-	sysctl kern.ipc.shm_allow_removed=1
-	addConf vfs.usermount 1 /etc/sysctl.conf
-	sysctl vfs.usermount=1
-	addConf hw.usb.no_shutdown_wait 1 /etc/sysctl.conf
-	sysctl hw.usb.no_shutdown_wait=1
-	addConf hw.syscons.bell 0 /etc/sysctl.conf
-	sysctl hw.syscons.bell=0
+    addConf kern.coredump 0 /etc/sysctl.conf
+    sysctl kern.coredump=0
+    addConf kern.maxfiles 49312 /etc/sysctl.conf
+    sysctl kern.maxfiles=49312
+    addConf kern.sched.preempt_thresh 224 /etc/sysctl.conf
+    sysctl kern.sched.preempt_thresh=224
+    addConf kern.shutdown.poweroff_delay 500 /etc/sysctl.conf
+    sysctl kern.shutdown.poweroff_delay=500
+    addConf kern.ipc.shm_allow_removed 1 /etc/sysctl.conf
+    sysctl kern.ipc.shm_allow_removed=1
+    addConf vfs.usermount 1 /etc/sysctl.conf
+    sysctl vfs.usermount=1
+    addConf hw.usb.no_shutdown_wait 1 /etc/sysctl.conf
+    sysctl hw.usb.no_shutdown_wait=1
+    addConf hw.syscons.bell 0 /etc/sysctl.conf
+    sysctl hw.syscons.bell=0
 
-	addConf kld_list "libiconv libmchain msdosfs_iconv cuse4bsd sem fdescfs \
+    addConf kld_list "libiconv libmchain msdosfs_iconv cuse4bsd sem fdescfs \
 linsysfs acpi_video fuse" /etc/rc.conf				
-	addConf kldxref_enable "YES" /etc/rc.conf
-	addConf kldxref_clobber "YES" /etc/rc.conf
+    addConf kldxref_enable "YES" /etc/rc.conf
+    addConf kldxref_clobber "YES" /etc/rc.conf
     addConf linux_enable "YES" /etc/rc.conf
-	addConf clear_tmp_enable "YES" /etc/rc.conf
-	addConf clean_tmp_X "YES" /etc/rc.conf
-	addConf fsck_y_enable "YES" /etc/rc.conf
-	addConf dumpdev "AUTO" /etc/rc.conf
-	addConf panicmail_enable "YES" /etc/rc.conf
-	addConf panicmail_autosubmit "YES" /etc/rc.conf
-	addConf autofs_enable "YES" /etc/rc.conf
-	addConf swapexd_enable "YES" /etc/rc.conf
-	addConf powerd_enable "YES" /etc/rc.conf
-	addConf powerd_flags "-a hiadaptive -b adaptive" /etc/rc.conf
-	addConf performance_cx_lowest "Cmax" /etc/rc.conf
-	addConf economy_cx_lowest "Cmax" /etc/rc.conf
-	addConf moused_enable "YES" /etc/rc.conf
-	addConf uhidd_flags "-kmohsu" /etc/rc.conf
-	addConf uhidd_enable "YES" /etc/rc.conf
-	addConf volmand_enable "YES" /etc/rc.conf
-	addConf webcamd_enable "YES" /etc/rc.conf
-	addConf cupsd_enable "YES" /etc/rc.conf
-	addConf avahi_daemon_enable "YES" /etc/rc.conf
-	addConf devd_enable "YES" /etc/rc.conf
-	addConf devfs_enable "YES" /etc/rc.conf
-	addConf devfs_system_ruleset "devfsrules_common" /etc/rc.conf
-	addConf hald_enable "YES" /etc/rc.conf
-	addConf dbus_enable "YES" /etc/rc.conf
-	addConf slim_enable "YES" /etc/rc.conf
+    addConf clear_tmp_enable "YES" /etc/rc.conf
+    addConf clean_tmp_X "YES" /etc/rc.conf
+    addConf fsck_y_enable "YES" /etc/rc.conf
+    addConf dumpdev "AUTO" /etc/rc.conf
+    addConf panicmail_enable "YES" /etc/rc.conf
+    addConf panicmail_autosubmit "YES" /etc/rc.conf
+    addConf autofs_enable "YES" /etc/rc.conf
+    addConf swapexd_enable "YES" /etc/rc.conf
+    addConf powerd_enable "YES" /etc/rc.conf
+    addConf powerd_flags "-a hiadaptive -b adaptive" /etc/rc.conf
+    addConf performance_cx_lowest "Cmax" /etc/rc.conf
+    addConf economy_cx_lowest "Cmax" /etc/rc.conf
+    addConf moused_enable "YES" /etc/rc.conf
+    addConf uhidd_flags "-kmohsu" /etc/rc.conf
+    addConf uhidd_enable "YES" /etc/rc.conf
+    addConf volmand_enable "YES" /etc/rc.conf
+    addConf webcamd_enable "YES" /etc/rc.conf
+    addConf cupsd_enable "YES" /etc/rc.conf
+    addConf avahi_daemon_enable "YES" /etc/rc.conf
+    addConf devd_enable "YES" /etc/rc.conf
+    addConf devfs_enable "YES" /etc/rc.conf
+    addConf devfs_system_ruleset "devfsrules_common" /etc/rc.conf
+    addConf hald_enable "YES" /etc/rc.conf
+    addConf dbus_enable "YES" /etc/rc.conf
+    addConf slim_enable "YES" /etc/rc.conf
 
 	if [ "$PACKAGE_FIREFOX" != "" ]
 	then
