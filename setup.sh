@@ -630,7 +630,7 @@ install () {
 					xrandr \
 					hal dbus \
 					setxkbmap \
-					xterm \
+					xterm gksu octopkg \
 					zip p7zip rar lha \
 					ja-font-migu \
 					ja-font-ipamjm \
@@ -910,6 +910,16 @@ EOF
 
     sed -i "" -e "s@^Icon=.*@Icon=/usr/local/share/hydrogen/data/img/gray/icon.svg@" \
         /usr/local/share/applications/hydrogen.desktop 2>&1
+
+    echo "Name[ja]=OctoPkg パッケージマネージャー" \
+        >> /usr/local/share/applications/octopkg.desktop
+
+    echo "GenericName[ja]=パッケージマネージャー" \
+        >> /usr/local/share/applications/octopkg.desktop
+
+    echo "Comment[ja]=パッケージの追加と削除" \
+        >> /usr/local/share/applications/octopkg.desktop
+
 
 	if [ "$PACKAGE_AUDIO_PRODUCTION" != "" ]
 	then
