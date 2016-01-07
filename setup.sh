@@ -968,6 +968,8 @@ add path 'dvb/*' mode 666
 add path 'vmm/*' mode 66
 add path 'msdosfs/*' mode 666
 add path 'dri/*' mode 666
+add path 'mdctl' mode 666 
+add path 'md[0-9]' mode 666
 EOF
 
 	if [ ! -d /usr/local/share/xsessions ]
