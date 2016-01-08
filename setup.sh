@@ -743,7 +743,6 @@ linsysfs acpi_video fuse" /etc/rc.conf
     addConf performance_cx_lowest "Cmax" /etc/rc.conf
     addConf economy_cx_lowest "Cmax" /etc/rc.conf
     addConf moused_enable "YES" /etc/rc.conf
-    addConf uhidd_flags "-kmohsu" /etc/rc.conf
     addConf uhidd_enable "YES" /etc/rc.conf
     addConf volmand_enable "YES" /etc/rc.conf
     addConf webcamd_enable "YES" /etc/rc.conf
@@ -951,6 +950,7 @@ add path 'cd[0-9]*' mode 666
 add path 'cuaU[0-9]*' mode 666
 add path 'cuad[0-9]*' mode 666
 add path 'bpf[0-9]*' mode 666
+add path 'bpf' mode 666
 add path 'mmcsd[0-9]*' mode 666
 add path 'pass[0-9]*' mode 666
 add path 'xpt[0-9]*'    mode 666
@@ -970,6 +970,10 @@ add path 'msdosfs/*' mode 666
 add path 'dri/*' mode 666
 add path 'mdctl' mode 666 
 add path 'md[0-9]' mode 666
+add path 'uhid[0-9]' mode 666
+add path 'uvhid[0-9]' mode 666
+add path 'vkbd[0-9]' mode 666
+add path 'vkbdctl[0-9]' mode 666
 EOF
 
 	if [ ! -d /usr/local/share/xsessions ]
