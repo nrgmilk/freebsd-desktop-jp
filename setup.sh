@@ -730,7 +730,7 @@ setup (){
     sysctl hw.syscons.bell=0
 
     addConf kld_list "libiconv libmchain msdosfs_iconv cuse4bsd sem fdescfs \
-linsysfs acpi_video fuse" /etc/rc.conf				
+linsysfs ext2fs acpi_video fuse" /etc/rc.conf				
     addConf kldxref_enable "YES" /etc/rc.conf
     addConf kldxref_clobber "YES" /etc/rc.conf
     addConf linux_enable "YES" /etc/rc.conf
