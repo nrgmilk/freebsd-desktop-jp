@@ -642,6 +642,7 @@ install () {
 					swapexd webcamd \
 					fusefs-ext4fuse \
 					fusefs-ntfs \
+					e2fsprogs ntfsprogs \
 					cuse4bsd-kmod \
 					panicmail \
 					cups avahi \
