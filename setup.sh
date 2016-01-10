@@ -951,6 +951,7 @@ add path 'cuaU[0-9]*' mode 666
 add path 'cuad[0-9]*' mode 666
 add path 'bpf[0-9]*' mode 666
 add path 'bpf' mode 666
+add path 'fuse' mode 666
 add path 'mmcsd[0-9]*' mode 666
 add path 'pass[0-9]*' mode 666
 add path 'xpt[0-9]*'    mode 666
