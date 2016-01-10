@@ -624,7 +624,10 @@ $EXTRA
 install () {
 
 	kldload linux
-	
+    
+    sed -i "" -e 's@url: "pkg+http://pkg.FreeBSD.org/\${ABI}/.*"@url: "pkg+http://pkg.FreeBSD.org/\${ABI}/latest"@' \
+        /etc/pkg/FreeBSD.conf
+
 	pkg install -y 	xorg-minimal \
 					xorg-drivers \
 					xrandr \
