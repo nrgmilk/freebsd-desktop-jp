@@ -705,6 +705,7 @@ setup (){
     addConf kern.ipc.shmmni 1024 /boot/loader.conf
     addConf kern.maxproc 10000 /boot/loader.conf
     addConf kern.cam.scsi_delay 500 /boot/loader.conf
+    addConf kern.hz 100 /boot/loader.conf
     addConf hint.acpi_throttle.0.disabled 1 /boot/loader.conf
     addConf machdep.disable_mtrrs 1 /boot/loader.conf
     addConf hw.memtest.tests 0 /boot/loader.conf
