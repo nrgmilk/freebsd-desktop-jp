@@ -683,6 +683,8 @@ setup (){
     addFstab linprocfs "linprocfs /compat/linux/proc linprocfs rw 0 0"
     addFstab linsysfs "linprocfs /compat/linux/sys linsysfs rw 0 0"
 	addFstab fdesc "fdesc /dev/fd fdescfs rw 0 0"
+    mkdir /tmpfs > /dev/null 2>&1
+    echo "tmpfs /tmpfs tmpfs rw,mode=01777 0 0" >> /etc/fstab
 
 	sed -i "" -e "s/^#sessiondir/sessiondir/" /usr/local/etc/slim.conf
 	sed -i "" -e "s/^login_cmd/#login_cmd/" /usr/local/etc/slim.conf
@@ -711,7 +713,7 @@ setup (){
     addConf ums_load "YES" /boot/loader.conf
     addConf aesni_load "YES" /boot/loader.conf
     addConf linux_load "YES" /boot/loader.conf
-    
+
     addConf kern.coredump 0 /etc/sysctl.conf
     sysctl kern.coredump=0
     addConf kern.maxfiles 49312 /etc/sysctl.conf
@@ -720,6 +722,15 @@ setup (){
     sysctl kern.sched.preempt_thresh=224
     addConf kern.shutdown.poweroff_delay 500 /etc/sysctl.conf
     sysctl kern.shutdown.poweroff_delay=500
+
+    SHMMAX=`sysctl -n hw.physmem`
+    addConf kern.ipc.shmmax $SHMMAX /etc/sysctl.conf
+    sysctl kern.ipc.shmmax=$SHMMAX
+    
+    SHMALL=`expr $SHMMAX / 4096`    
+    addConf kern.ipc.shmall $SHMALL /etc/sysctl.conf
+    sysctl kern.ipc.shmall=$SHMALL
+    
     addConf kern.ipc.shm_allow_removed 1 /etc/sysctl.conf
     sysctl kern.ipc.shm_allow_removed=1
     addConf vfs.usermount 1 /etc/sysctl.conf
@@ -942,6 +953,9 @@ EOF
 	fi
 
 	mv /etc/X11/xorg.conf /etc/X11/xorg.conf.`date +%s`	 > /dev/null 2>&1
+    
+    echo "link /tmpfs shm" >> /etc/devfs.conf
+    
 	mv /etc/devfs.rules /etc/devfs.rules.`date +%s`	 > /dev/null 2>&1
 	
 	cat >> /etc/devfs.rules << EOF
@@ -1110,4 +1124,5 @@ done
 install
 setup
 mount -a
+service devfs restart
 service -R
