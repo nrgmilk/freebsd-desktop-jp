@@ -1125,5 +1125,6 @@ done
 install
 setup
 mount -a
+service kld start
 service devfs restart
 service -R
