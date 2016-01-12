@@ -711,9 +711,13 @@ setup (){
     addConf hw.memtest.tests 0 /boot/loader.conf
     addConf hw.pci.do_power_nodriver 3 /boot/loader.conf
     addConf net.graph.maxdata 65536 /boot/loader.conf
+    addConf drm_load "YES" /boot/loader.conf
+    addConf drm2_load "YES" /boot/loader.conf
+    addConf iicbus_load "YES" /boot/loader.conf
     addConf ums_load "YES" /boot/loader.conf
     addConf aesni_load "YES" /boot/loader.conf
     addConf linux_load "YES" /boot/loader.conf
+    kldload drm drm2 iicbus ums aesni > /dev/null 2>&1
 
     addConf kern.coredump 0 /etc/sysctl.conf
     sysctl kern.coredump=0
@@ -953,6 +957,8 @@ MimeType=application/x-ardour;
 EOF
 	fi
 
+    echo "/media -media -nosuid" >> /etc/auto_master
+
 	mv /etc/X11/xorg.conf /etc/X11/xorg.conf.`date +%s`	 > /dev/null 2>&1
     
     echo "link /tmpfs shm" >> /etc/devfs.conf
@@ -1126,5 +1132,9 @@ install
 setup
 mount -a
 service kld start
+service devd restart
 service devfs restart
+service automount start
+service automountd start
+service autounmountd start
 service -R
