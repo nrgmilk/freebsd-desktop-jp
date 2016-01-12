@@ -381,7 +381,7 @@ EOF
 
 selectExtra () {
 	EXTRA=`dialog  --stdout --no-tags --nocancel --checklist \
-            "Select extra packages. " 20 76 58 \
+            "Select extra packages. " 20 76 54 \
             flash "Adobe Flash Player" off \
             firefox "Firefox (Web browser)" off  \
             chromium "Chrome (Web browser)" off \
@@ -409,7 +409,6 @@ selectExtra () {
             fontforge "FontForge (Font editor)" off \
             agave "Agave (Color scheme builder)" off \
             xsane "SANE (Scanner API tool)" off \
-            ffmpeg "FFmpeg (Audio/video encoder/converter)" off \
             openshot "OpenShot Video Editor (Non-linear video editor)" off \
             pitivi "Pitivi (Non-linear video editor)" off \
             kdenlive "Kdenlive (Non-linear video editor)" off \
