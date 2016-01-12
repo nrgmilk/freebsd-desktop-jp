@@ -663,6 +663,13 @@ install () {
 
 	if [ "$PORTS_EXTRA" != "" ]
 	then
+        while [ `ps|grep -v grep|grep -c "/bin/sh /usr/sbin/portsnap"` -ne 0 ]
+        do
+            echo -n "waiting for portsnap...
+"
+            sleep 1
+        done
+
 		for i in $PORTS_EXTRA
 		do
 			make BATCH=yes -C /usr/ports/$i install clean
