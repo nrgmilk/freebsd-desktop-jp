@@ -336,6 +336,8 @@ if [ ! -f \$HOME/.ibus_firsttime ]
 then
 	dconf write /desktop/ibus/general/engines-order "['$IM_ENGINE', 'xkb:jp::jpn']"
 	dconf write /desktop/ibus/general/preload-engines "['$IM_ENGINE', 'xkb:jp::jpn']"
+	dconf write /desktop/ibus/panel/show-icon-on-systray true
+    dconf write /desktop/ibus/panel/show 1
 	touch \$HOME/.ibus_firsttime
 fi
 case \$1 in
@@ -429,6 +431,7 @@ selectExtra () {
             openjdk8 "OpenJDK 8 (Java development kit)" off \
             virtualbox "VirtualBox (Virtual machine)" off \
             wine "Wine (Windows compatibility environment)" off \
+            playonbsd "PlayOnBSD (Wine application install and launch helper)" off \
             android-tools-adb "ADB (Android debug bridge)" off \
             clamav "ClamAV (Antivirus)" off \
             tor "TOR (Anonymizing overlay network for TCP)" off \
@@ -475,10 +478,10 @@ packageExtra () {
 					if [ $ARCH == "amd64" ]
 					then
 						PACKAGE_EXTRA="$PACKAGE_EXTRA\
-							          i386-wine-staging "
+							          i386-wine-devel "
 					else
 						PACKAGE_EXTRA="$PACKAGE_EXTRA\
-							          wine-staging "
+							          wine-devel "
 					fi
 					;;
 				'vlc')
@@ -546,6 +549,15 @@ packageExtra () {
                                     jack_umidi "
                     PACKAGE_AUDIO_PRODUCTION=1
                     ;;
+				'playonbsd')
+					PACKAGE_EXTRA="$PACKAGE_EXTRA\
+                                    playonbsd \
+                                    cabextract \
+                                    ImageMagick \
+                                    wget \
+                                    icoutils "
+                    PACKAGE_PLAYONBSD=1
+					;;
 				*)
 					PACKAGE_EXTRA=$PACKAGE_EXTRA"$i ";;
 			esac
@@ -960,6 +972,21 @@ Type=Application
 Icon=/usr/local/share/ardour2/icons/ardour_icon_48px.png
 Categories=AudioVideo;Audio;
 MimeType=application/x-ardour;
+EOF
+	fi
+
+	if [ "$PACKAGE_PLAYONBSD" != "" ]
+	then
+        cat > /usr/local/share/applications/playonbsd.desktop << EOF
+[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Name=PlayOnBSD
+Comment=PlayOnBSD
+Type=Application
+Exec=playonbsd
+Icon=/usr/local/lib/playonbsd/etc/playonlinux.png
+Categories=Game;
 EOF
 	fi
 
